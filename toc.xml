@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Addon Author="Sethanon" APIVersion="9" Name="LinkEquipped" Description="Link your equipped items through a menu to a specific target or channel">
+    <Script Name="LinkEquipped.lua"/>
+    <Form Name="LinkEquipped.xml"/>
+</Addon>
