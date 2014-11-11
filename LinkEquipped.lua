@@ -84,24 +84,26 @@ function LinkEquipped:OnLinkEquipped()
 		self.wndMain:Show(true)
 		self:GetEquippedItems()
 		self:FillEquippedList()
-		self:GetGroupLeader()
-		if GroupLib.GetGroupMaxSize() > 0 then
-			self.wndMain:FindChild("Player"):SetText(oLeader:GetName())
-		end
+		--self:GetGroupLeader()
+		--if GroupLib.GetGroupMaxSize() > 0 then
+		--	self.wndMain:FindChild("Player"):SetText("/w "..oLeader:GetName())
+		--end
 	end
 end
 
-function LinkEquipped:GetGroupLeader()
-	local tGroupMembers = {}
-	local oLeader = 0
-	for i=1, GroupLib.GetGroupMaxSize() do
-		tGroupMembers = GroupLib.GetGroupMember(i)
-		if tGroupMembers.bIsLeader then oLeader = tGroupMembers end
-	end
-end
+--function LinkEquipped:GetGroupLeader()
+--	local tGroupMembers = {}
+--	local oLeader = 0
+--	for i=1, GroupLib.GetGroupMaxSize() do
+--		tGroupMembers[i] = GroupLib.GetGroupMember(i)
+--		if tGroupMembers.bIsLeader then oLeader = tGroupMembers end
+--	end
+--end
 
 function LinkEquipped:GetEquippedItems()
 	-- Get Everything Equipped
+	self.tEquippedItems = {}
+	self.tEquippedList = {}
 	self.tEquippedItems = GameLib.GetPlayerUnit():GetEquippedItems()
 	
 	-- Filter the list for only the slots that matter
@@ -120,9 +122,6 @@ function LinkEquipped:FillEquippedList()
 		wndCurrentItem:FindChild("ItemIcon"):SetSprite(self.tEquippedList[idx]:GetIcon())
 		wndCurrentItem:FindChild("ItemName"):SetText(self.tEquippedList[idx]:GetName())
 		wndCurrentItem:SetData(self.tEquippedList[idx])
-		--if self.tMasterLootSelectedItem ~= nil and (self.tMasterLootSelectedItem.nLootId == tItem.nLootId) then
-		--	wndCurrentItem:SetCheck(true)
-		--end
 		Tooltip.GetItemTooltipForm(self, wndCurrentItem , self.tEquippedList[idx], {bPrimary = true, bSelling = false})
 	end
 	
